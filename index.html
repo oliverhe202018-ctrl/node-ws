@@ -1,722 +1,889 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Green Network - Protect Earth</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        :root {
-            --primary: #2e7d32;
-            --secondary: #4caf50;
-            --accent: #8bc34a;
-            --light: #e8f5e9;
-            --dark: #1b5e20;
-            --text: #333333;
-            --white: #ffffff;
-        }
-
-        body {
-            background-color: var(--light);
-            color: var(--text);
-            line-height: 1.6;
-        }
-
-        header {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 1.8rem;
-            font-weight: 700;
-        }
-
-        .logo i {
-            font-size: 2rem;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 2rem;
-        }
-
-        nav ul li a {
-            color: var(--white);
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s ease;
-            padding: 0.5rem 0;
-            position: relative;
-        }
-
-        nav ul li a:hover {
-            color: var(--accent);
-        }
-
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background-color: var(--accent);
-            transition: width 0.3s ease;
-        }
-
-        nav ul li a:hover::after {
-            width: 100%;
-        }
-
-        .hero {
-            background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.4)), url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2073&q=80');
-            background-size: cover;
-            background-position: center;
-            height: 80vh;
-            display: flex;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
-        }
-
-        .hero-content {
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-        }
-
-        .hero p {
-            font-size: 1.3rem;
-            margin-bottom: 2rem;
-        }
-
-        .btn {
-            display: inline-block;
-            background-color: var(--accent);
-            color: var(--white);
-            padding: 0.8rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        .btn:hover {
-            background-color: var(--primary);
-            transform: translateY(-3px);
-            box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
-        }
-
-        section {
-            padding: 5rem 0;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 80px;
-            height: 4px;
-            background-color: var(--accent);
-            border-radius: 2px;
-        }
-
-        .section-title p {
-            color: var(--text);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-            align-items: center;
-        }
-
-        .about-img {
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .about-img img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transition: transform 0.5s ease;
-        }
-
-        .about-img:hover img {
-            transform: scale(1.05);
-        }
-
-        .about-text h3 {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-        }
-
-        .about-text p {
-            margin-bottom: 1.5rem;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--white);
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-10px);
-        }
-
-        .stat-item i {
-            font-size: 2.5rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 2.5rem;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-item p {
-            color: var(--text);
-        }
-
-        .initiatives {
-            background-color: var(--white);
-        }
-
-        .initiatives-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 2rem;
-        }
-
-        .initiative-card {
-            background-color: var(--light);
-            border-radius: 10px;
-            overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
-            transition: transform 0.3s ease;
-        }
-
-        .initiative-card:hover {
-            transform: translateY(-10px);
-        }
-
-        .initiative-img {
-            height: 200px;
-            overflow: hidden;
-        }
-
-        .initiative-img img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.5s ease;
-        }
-
-        .initiative-card:hover .initiative-img img {
-            transform: scale(1.1);
-        }
-
-        .initiative-content {
-            padding: 1.5rem;
-        }
-
-        .initiative-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        .initiative-content p {
-            margin-bottom: 1.5rem;
-        }
-
-        .cta {
-            background: linear-gradient(to right, var(--primary), var(--secondary));
-            color: var(--white);
-            text-align: center;
-            padding: 5rem 0;
-        }
-
-        .cta h2 {
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .cta p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            max-width: 700px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .cta .btn {
-            background-color: var(--white);
-            color: var(--primary);
-        }
-
-        .cta .btn:hover {
-            background-color: var(--accent);
-            color: var(--white);
-        }
-
-        footer {
-            background-color: var(--dark);
-            color: var(--white);
-            padding: 3rem 0 1rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-column h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 40px;
-            height: 2px;
-            background-color: var(--accent);
-        }
-
-        .footer-column p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-links li a {
-            color: var(--light);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .footer-links li a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .social-links a {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background-color: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: var(--white);
-            text-decoration: none;
-            transition: all 0.3s ease;
-        }
-
-        .social-links a:hover {
-            background-color: var(--accent);
-            transform: translateY(-5px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .mobile-menu {
-            display: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 992px) {
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .footer-content {
-                grid-template-columns: repeat(2, 1fr);
-            }
-            
-            .stats {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            
-            .hero p {
-                font-size: 1.1rem;
-            }
-            
-            nav ul {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                width: 100%;
-                background-color: var(--primary);
-                flex-direction: column;
-                padding: 1rem 0;
-                text-align: center;
-                box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            }
-            
-            nav ul.active {
-                display: flex;
-            }
-            
-            nav ul li {
-                margin: 0;
-                padding: 0.8rem 0;
-            }
-            
-            .mobile-menu {
-                display: block;
-            }
-            
-            .initiatives-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .footer-content {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Animation for stats counter */
-        .counter {
-            transition: all 0.5s ease;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>镜中宇宙 · Unique Static Page</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="一页独一无二的静态 HTML 宇宙。">
+  <style>
+    /* ====== 基础重置 ====== */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-main: #050816;
+      --bg-card: rgba(15, 23, 42, 0.85);
+      --accent: #38bdf8;
+      --accent-soft: rgba(56, 189, 248, 0.25);
+      --accent-strong: #f97316;
+      --text-main: #e5e7eb;
+      --text-sub: #9ca3af;
+      --border-soft: rgba(148, 163, 184, 0.25);
+      --radius-xl: 18px;
+      --radius-xxl: 32px;
+      --shadow-soft: 0 18px 45px rgba(15, 23, 42, 0.9);
+      --glass: rgba(15, 23, 42, 0.65);
+      --transition-fast: 0.18s ease-out;
+      --transition-normal: 0.4s ease;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: var(--text-main);
+      background: radial-gradient(circle at top left, #1d2440 0, #050816 45%, #000 100%);
+      overflow-x: hidden;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: stretch;
+      padding: 24px;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        padding: 12px;
+      }
+    }
+
+    /* ====== 背景装饰：星空 + 光圈 ====== */
+    .space-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .space-bg::before,
+    .space-bg::after {
+      content: "";
+      position: absolute;
+      width: 520px;
+      height: 520px;
+      border-radius: 999px;
+      filter: blur(70px);
+      opacity: 0.4;
+      mix-blend-mode: screen;
+    }
+
+    .space-bg::before {
+      top: -120px;
+      left: -120px;
+      background: radial-gradient(circle, #38bdf8, transparent 60%);
+      animation: floatOrb1 16s ease-in-out infinite alternate;
+    }
+
+    .space-bg::after {
+      bottom: -160px;
+      right: -60px;
+      background: radial-gradient(circle, #f97316, transparent 60%);
+      animation: floatOrb2 20s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatOrb1 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(40px, 60px) scale(1.15); }
+    }
+
+    @keyframes floatOrb2 {
+      0% { transform: translate(0, 0) scale(1); }
+      100% { transform: translate(-40px, -40px) scale(1.1); }
+    }
+
+    .stars {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(1px 1px at 10% 20%, rgba(248, 250, 252, 0.8) 0, transparent 40%),
+        radial-gradient(1px 1px at 80% 10%, rgba(248, 250, 252, 0.5) 0, transparent 40%),
+        radial-gradient(1px 1px at 40% 70%, rgba(248, 250, 252, 0.7) 0, transparent 40%),
+        radial-gradient(1px 1px at 90% 60%, rgba(248, 250, 252, 0.4) 0, transparent 40%);
+      opacity: 0.7;
+      animation: twinkle 24s linear infinite alternate;
+    }
+
+    @keyframes twinkle {
+      0% { opacity: 0.4; transform: translateY(0); }
+      100% { opacity: 0.9; transform: translateY(-20px); }
+    }
+
+    /* ====== 主容器 ====== */
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      margin: auto;
+      border-radius: var(--radius-xxl);
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9), rgba(3, 7, 18, 0.98));
+      box-shadow: var(--shadow-soft);
+      position: relative;
+      padding: 20px;
+      overflow: hidden;
+      backdrop-filter: blur(22px) saturate(160%);
+    }
+
+    .shell::before {
+      content: "MIRROR·VERSE";
+      position: absolute;
+      top: 18px;
+      right: 24px;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(148, 163, 184, 0.35);
+    }
+
+    @media (max-width: 768px) {
+      .shell {
+        padding: 16px;
+        border-radius: 20px;
+      }
+      .shell::before {
+        display: none;
+      }
+    }
+
+    /* ====== Header 区域 ====== */
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 10px 12px 18px 12px;
+      border-bottom: 1px solid rgba(30, 64, 175, 0.5);
+      margin-bottom: 16px;
+    }
+
+    .logo-mark {
+      width: 40px;
+      height: 40px;
+      border-radius: 15px;
+      border: 1px solid rgba(148, 163, 184, 0.55);
+      position: relative;
+      background: radial-gradient(circle at 20% 20%, #38bdf8, #0f172a 65%);
+      box-shadow: 0 12px 30px rgba(15, 23, 42, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      letter-spacing: 0.08em;
+      color: #e5f4ff;
+      overflow: hidden;
+    }
+
+    .logo-mark::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(248, 250, 252, 0.4), transparent 45%);
+      mix-blend-mode: screen;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-title {
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-pill {
+      font-size: 10px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.7);
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.12), transparent 70%);
+      color: #bae6fd;
+    }
+
+    .brand-sub {
+      font-size: 12px;
+      color: var(--text-sub);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--text-sub);
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: #22c55e;
+      box-shadow: 0 0 12px rgba(34, 197, 94, 0.8);
+      margin-right: 2px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(52, 211, 153, 0.5);
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.12), transparent 65%);
+    }
+
+    /* ====== 主体布局 ====== */
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2.1fr) minmax(0, 1.4fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* ====== 左侧：介绍 / 时间线 / 签名卡 ====== */
+    .panel {
+      background: var(--glass);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 16px 16px 18px 16px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .panel::before {
+      content: "";
+      position: absolute;
+      inset: -80%;
+      opacity: 0;
+      background: conic-gradient(
+        from 180deg,
+        rgba(56, 189, 248, 0.1),
+        transparent,
+        rgba(56, 189, 248, 0.16),
+        transparent,
+        rgba(249, 115, 22, 0.26),
+        transparent
+      );
+      transition: opacity var(--transition-normal);
+      pointer-events: none;
+    }
+
+    .panel:hover::before {
+      opacity: 0.5;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 10px;
+    }
+
+    .panel-title {
+      font-size: 16px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .panel-title span {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #cbd5f5;
+    }
+
+    .panel-subtitle {
+      font-size: 11px;
+      color: var(--text-sub);
+    }
+
+    .hero-block {
+      margin-top: 4px;
+      margin-bottom: 12px;
+      padding: 12px 10px 12px 10px;
+      border-radius: 14px;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+      background: radial-gradient(circle at top left, rgba(30, 64, 175, 0.85), rgba(15, 23, 42, 0.95));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-block::after {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      opacity: 0.13;
+      background: radial-gradient(circle at 0 0, #f97316, transparent 60%);
+      mix-blend-mode: screen;
+      transform: translate3d(0, 0, 0);
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(191, 219, 254, 0.85);
+      margin-bottom: 6px;
+    }
+
+    .hero-title {
+      font-size: clamp(20px, 2.4vw, 26px);
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 8px;
+    }
+
+    .hero-highlight {
+      background-image: linear-gradient(120deg, #f97316, #facc15, #38bdf8);
+      -webkit-background-clip: text;
+      color: transparent;
+      text-shadow: 0 0 20px rgba(248, 250, 252, 0.2);
+    }
+
+    .hero-desc {
+      font-size: 13px;
+      color: rgba(226, 232, 240, 0.95);
+      max-width: 460px;
+      line-height: 1.6;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      font-size: 11px;
+      color: rgba(191, 219, 254, 0.9);
+    }
+
+    .hero-chip {
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid rgba(129, 140, 248, 0.9);
+      background: radial-gradient(circle, rgba(129, 140, 248, 0.2), transparent 70%);
+    }
+
+    .timeline {
+      margin-top: 10px;
+      padding-top: 4px;
+      border-top: 1px dashed rgba(148, 163, 184, 0.55);
+    }
+
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 10px;
+      padding: 6px 2px;
+      align-items: flex-start;
+      position: relative;
+    }
+
+    .timeline-item:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      left: 60px;
+      top: 26px;
+      bottom: -4px;
+      width: 1px;
+      background: linear-gradient(to bottom, rgba(148, 163, 184, 0.6), transparent);
+    }
+
+    .timeline-time {
+      font-size: 11px;
+      color: rgba(148, 163, 184, 0.85);
+      text-align: right;
+      padding-right: 8px;
+      white-space: nowrap;
+    }
+
+    .timeline-card {
+      padding: 6px 8px;
+      border-radius: 10px;
+      border: 1px solid rgba(51, 65, 85, 0.9);
+      background: radial-gradient(circle at top left, rgba(15, 23, 42, 0.98), rgba(15, 23, 42, 0.9));
+      position: relative;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -6px;
+      top: 11px;
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #38bdf8;
+      border: 2px solid rgba(15, 23, 42, 0.9);
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.8);
+    }
+
+    .timeline-title {
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 2px;
+    }
+
+    .timeline-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 4px;
+      font-size: 10px;
+    }
+
+    .timeline-tag {
+      padding: 2px 6px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: rgba(148, 163, 184, 0.95);
+    }
+
+    .timeline-brief {
+      font-size: 11px;
+      color: var(--text-sub);
+      margin-top: 3px;
+      line-height: 1.5;
+    }
+
+    /* ====== 左下角：签名 / 一句话 ====== */
+    .signature-card {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 11px;
+      border: 1px dashed rgba(148, 163, 184, 0.7);
+      background: radial-gradient(circle at 10% 0, rgba(56, 189, 248, 0.18), transparent 60%);
+      font-size: 11px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .signature-text strong {
+      color: #e5f4ff;
+    }
+
+    .signature-id {
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 10px;
+      padding: 3px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.9);
+      color: rgba(148, 163, 184, 0.9);
+    }
+
+    /* ====== 右侧：互动小部件 / 自省问题 ====== */
+    .right-panel {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .widget {
+      background: var(--glass);
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--border-soft);
+      padding: 12px 12px 13px 12px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .widget-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .widget-title-row span {
+      font-weight: 500;
+    }
+
+    .widget-badge {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(56, 189, 248, 0.6);
+      color: #bae6fd;
+      background: radial-gradient(circle, rgba(56, 189, 248, 0.18), transparent 60%);
+    }
+
+    .quote {
+      font-size: 13px;
+      line-height: 1.6;
+      color: var(--text-main);
+      margin-bottom: 6px;
+    }
+
+    .quote em {
+      font-style: normal;
+      color: #fbbf24;
+    }
+
+    .quote-author {
+      font-size: 11px;
+      color: var(--text-sub);
+      text-align: right;
+    }
+
+    .question-list {
+      margin-top: 6px;
+      list-style: none;
+      font-size: 12px;
+      color: var(--text-sub);
+      display: grid;
+      gap: 5px;
+    }
+
+    .question-list li {
+      position: relative;
+      padding-left: 16px;
+    }
+
+    .question-list li::before {
+      content: "✦";
+      position: absolute;
+      left: 0;
+      top: 1px;
+      font-size: 10px;
+      color: #38bdf8;
+    }
+
+    .meta-strip {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 10px;
+      color: var(--text-sub);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin-top: 5px;
+    }
+
+    .pill {
+      border-radius: 999px;
+      padding: 2px 6px;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    /* ====== 「今日心情」条形图（纯 CSS 伪动态） ====== */
+    .mood-grid {
+      margin-top: 4px;
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 6px;
+      font-size: 11px;
+    }
+
+    .mood-row {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .mood-label {
+      text-align: right;
+      color: var(--text-sub);
+      white-space: nowrap;
+    }
+
+    .mood-bar {
+      position: relative;
+      height: 7px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 0 50%, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.98));
+      overflow: hidden;
+      border: 1px solid rgba(30, 64, 175, 0.7);
+    }
+
+    .mood-bar-fill {
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #22c55e, #fde047, #f97316);
+      transform-origin: left center;
+      transform: scaleX(0.4);
+      opacity: 0.9;
+    }
+
+    .mood-bar-fill[data-level="70"] { transform: scaleX(0.7); }
+    .mood-bar-fill[data-level="40"] { transform: scaleX(0.4); }
+    .mood-bar-fill[data-level="20"] { transform: scaleX(0.2); }
+
+    /* ====== 底部：一行说明 ====== */
+    .footer {
+      margin-top: 14px;
+      padding-top: 10px;
+      border-top: 1px dashed rgba(30, 64, 175, 0.7);
+      font-size: 10px;
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 8px;
+      color: var(--text-sub);
+      flex-wrap: wrap;
+    }
+
+    .footer a {
+      color: #38bdf8;
+      text-decoration: none;
+      border-bottom: 1px dotted rgba(56, 189, 248, 0.6);
+    }
+
+    .footer a:hover {
+      border-bottom-style: solid;
+    }
+
+    /* ====== 轻微动效：进入时淡入 ====== */
+    .shell,
+    .panel,
+    .widget {
+      opacity: 0;
+      transform: translateY(8px);
+      animation: fadeInUp var(--transition-normal) forwards;
+    }
+
+    .panel { animation-delay: 0.08s; }
+    .right-panel .widget:nth-child(1) { animation-delay: 0.12s; }
+    .right-panel .widget:nth-child(2) { animation-delay: 0.16s; }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+  </style>
 </head>
 <body>
-    <!-- Header -->
-    <header>
-        <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-seedling"></i>
-                <span>Green Network</span>
-            </div>
-            <nav>
-                <div class="mobile-menu">
-                    <i class="fas fa-bars"></i>
-                </div>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#initiatives">Initiatives</a></li>
-                    <li><a href="#get-involved">Get Involved</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
+  <!-- 星空背景 -->
+  <div class="space-bg">
+    <div class="stars"></div>
+  </div>
+
+  <!-- 主内容 -->
+  <main class="shell" aria-label="镜中宇宙 · 唯一的静态页面">
+    <!-- Header 区 -->
+    <header class="header">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div class="logo-mark" aria-hidden="true">
+          MV
         </div>
+        <div class="brand">
+          <div class="brand-title">
+            Mirror Verse
+            <span class="brand-pill">Static · Unique</span>
+          </div>
+          <p class="brand-sub">一页 · 一生只生成一次的静态宇宙快照（在你的电脑上）。</p>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="status-badge">
+          <span class="dot"></span>
+          <span>当前实例：在线且只存在于此刻的浏览器内存</span>
+        </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container hero-content">
-            <h1>Protect Our Planet, Preserve Our Future</h1>
-            <p>Join the global movement to create a sustainable world through conservation, education, and community action.</p>
-            <a href="#get-involved" class="btn">Join Our Network</a>
+    <!-- 主体布局 -->
+    <section class="layout">
+      <!-- 左侧：故事 + 时间线 -->
+      <section class="panel" aria-label="自我宇宙档案">
+        <div class="panel-header">
+          <h2 class="panel-title">
+            自我宇宙档案
+            <span>CHRONICLE</span>
+          </h2>
+          <p class="panel-subtitle">一页静态 HTML，记录你此刻的意识指纹。</p>
         </div>
+
+        <div class="hero-block">
+          <div class="hero-eyebrow">今日问题 · TODAY&apos;S PROMPT</div>
+          <h1 class="hero-title">
+            如果把你此刻的<em class="hero-highlight">心情</em>封装成一个宇宙，
+            你会给它取什么名字？
+          </h1>
+          <p class="hero-desc">
+            这个页面不会向服务器汇报任何信息，它只是安静地躺在你的设备里。
+            你可以把它当成一张小小的「心情观测记录单」，只属于你自己。
+          </p>
+          <div class="hero-meta-row">
+            <div class="hero-chip">完全静态 · 无需后端</div>
+            <div class="hero-chip">可任意修改 · 属于你</div>
+            <div class="hero-chip">不收集数据 · 零追踪</div>
+          </div>
+        </div>
+
+        <!-- 时间线 -->
+        <div class="timeline" aria-label="意识时间线">
+          <article class="timeline-item">
+            <div class="timeline-time">00:00</div>
+            <div class="timeline-card">
+              <span class="timeline-dot"></span>
+              <div class="timeline-title">世界安静到只剩下自己</div>
+              <div class="timeline-brief">
+                这是所有故事的起点：屏幕亮起，浏览器打开，你和这页静态 HTML 短暂地共享同一个坐标。
+              </div>
+              <div class="timeline-tag-row">
+                <span class="timeline-tag">意识初始化</span>
+                <span class="timeline-tag">瞬间的连接</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-time">T+01</div>
+            <div class="timeline-card">
+              <span class="timeline-dot"></span>
+              <div class="timeline-title">你为它想了一个名字</div>
+              <div class="timeline-brief">
+                在脑海里轻声给这个「内心小宇宙」起了个只有你自己听得懂的名字，
+                哪怕你没有写下来，它也已经存在过。
+              </div>
+              <div class="timeline-tag-row">
+                <span class="timeline-tag">私密命名仪式</span>
+                <span class="timeline-tag">无痕保存</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-time">T+∞</div>
+            <div class="timeline-card">
+              <span class="timeline-dot"></span>
+              <div class="timeline-title">页面被关闭 · 宇宙归档</div>
+              <div class="timeline-brief">
+                当你关掉标签页，这一瞬间的心情不会上传云端，也不会出现在数据库里。
+                它只会溶解进你的人生时间线里，变成一个无名节点。
+              </div>
+              <div class="timeline-tag-row">
+                <span class="timeline-tag">静态记忆</span>
+                <span class="timeline-tag">只在你知道</span>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- 签名 -->
+        <div class="signature-card">
+          <div class="signature-text">
+            <strong>小小约定：</strong> 如果你愿意，可以把这页 HTML 改成你的专属主页。
+          </div>
+          <div class="signature-id" aria-label="当前实例指纹（示意用）">
+            instance-<span id="instance-fragment">X7F-LOCAL</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 右侧：心情 / 提问 / 元信息 -->
+      <aside class="right-panel" aria-label="今日自省与元信息">
+        <!-- 心情小组件 -->
+        <section class="widget" aria-label="今日心情雷达">
+          <div class="widget-title-row">
+            <span>今日心情雷达</span>
+            <span class="widget-badge">Pure CSS · 伪动态</span>
+          </div>
+          <p class="quote">
+            你可以用眼睛大致估一估：
+            <em>「我今天的能量大概在哪一档？」</em>
+          </p>
+          <div class="mood-grid">
+            <div class="mood-row">
+              <div class="mood-label">好奇心</div>
+              <div class="mood-bar">
+                <!-- 你可以手动调 data-level 改变“长度” -->
+                <div class="mood-bar-fill" data-level="70"></div>
+              </div>
+            </div>
+            <div class="mood-row">
+              <div class="mood-label">平静度</div>
+              <div class="mood-bar">
+                <div class="mood-bar-fill" data-level="40"></div>
+              </div>
+            </div>
+            <div class="mood-row">
+              <div class="mood-label">想改变的冲动</div>
+              <div class="mood-bar">
+                <div class="mood-bar-fill" data-level="20"></div>
+              </div>
+            </div>
+          </div>
+          <div class="meta-strip">
+            <span>提示：纯静态，没有脚本在背后偷看。</span>
+            <span>你可以直接在源码里改成属于你的比例。</span>
+          </div>
+        </section>
+
+        <!-- 自省问题 -->
+        <section class="widget" aria-label="今晚可以问问自己的三件小事">
+          <div class="widget-title-row">
+            <span>今天结束前，你可以问自己：</span>
+            <span class="widget-badge">Self-Reflection</span>
+          </div>
+          <ul class="question-list">
+            <li>今天有没有哪一个瞬间，让你短暂地觉得「好像一切都没那么糟」？</li>
+            <li>如果只允许带走一个记忆片段写进这页 HTML 的注释里，你会选哪一个？</li>
+            <li>有没有一件微小的事情，是现在的你可以为「明天的你」做的？</li>
+          </ul>
+          <div class="pill-row">
+            <span class="pill">#静态网页</span>
+            <span class="pill">#把生活当作源码</span>
+            <span class="pill">#宇宙缩略图</span>
+          </div>
+          <p class="quote-author">—— 写在纯静态 HTML 注释之外的小纸条</p>
+        </section>
+      </aside>
     </section>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Green Network</h2>
-                <p>We are a global community dedicated to environmental protection and sustainable development.</p>
-            </div>
-            <div class="about-content">
-                <div class="about-img">
-                    <img src="https://images.unsplash.com/photo-1507591064344-4c6ce005b128?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Team planting trees">
-                </div>
-                <div class="about-text">
-                    <h3>Our Mission</h3>
-                    <p>Green Network is committed to creating a sustainable future by protecting natural ecosystems, promoting renewable energy, and empowering communities to take environmental action.</p>
-                    <p>Founded in 2010, we've grown from a small grassroots organization to an international network with over 50,000 members across 120 countries.</p>
-                    <p>Our approach combines scientific research, community engagement, and policy advocacy to address the most pressing environmental challenges of our time.</p>
-                    <a href="#" class="btn">Learn More</a>
-                </div>
-            </div>
-            <div class="stats">
-                <div class="stat-item">
-                    <i class="fas fa-tree"></i>
-                    <h3 class="counter" data-target="2500000">0</h3>
-                    <p>Trees Planted</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-users"></i>
-                    <h3 class="counter" data-target="50000">0</h3>
-                    <p>Active Members</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-globe-americas"></i>
-                    <h3 class="counter" data-target="120">0</h3>
-                    <p>Countries Reached</p>
-                </div>
-                <div class="stat-item">
-                    <i class="fas fa-recycle"></i>
-                    <h3 class="counter" data-target="1500">0</h3>
-                    <p>Cleanup Projects</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Initiatives Section -->
-    <section class="initiatives" id="initiatives">
-        <div class="container">
-            <div class="section-title">
-                <h2>Our Initiatives</h2>
-                <p>Discover the key programs and projects we're implementing to protect our planet.</p>
-            </div>
-            <div class="initiatives-grid">
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://dialogue.earth/content/uploads/2021/04/lessons-from-the-rush-to-reforest-china-dialogue-2400x1599.jpg" alt="Reforestation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Global Reforestation</h3>
-                        <p>Planting millions of trees worldwide to restore ecosystems, combat climate change, and protect biodiversity.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1621451537084-482c73073a0f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1974&q=80" alt="Ocean Conservation">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Ocean Conservation</h3>
-                        <p>Protecting marine ecosystems, reducing plastic pollution, and promoting sustainable fishing practices.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-                <div class="initiative-card">
-                    <div class="initiative-img">
-                        <img src="https://images.unsplash.com/photo-1508514177221-188b1cf16e9d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80" alt="Renewable Energy">
-                    </div>
-                    <div class="initiative-content">
-                        <h3>Renewable Energy</h3>
-                        <p>Promoting solar, wind, and other clean energy sources to reduce dependence on fossil fuels.</p>
-                        <a href="#" class="btn">Learn More</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- CTA Section -->
-    <section class="cta" id="get-involved">
-        <div class="container">
-            <h2>Join Our Global Movement</h2>
-            <p>Together, we can create a sustainable future for generations to come. Every action counts, no matter how small.</p>
-            <a href="#" class="btn">Become a Member</a>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="contact">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-column">
-                    <h3>Green Network</h3>
-                    <p>We are dedicated to protecting our planet through collaborative action, education, and sustainable solutions.</p>
-                    <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#home">Home</a></li>
-                        <li><a href="#about">About Us</a></li>
-                        <li><a href="#initiatives">Initiatives</a></li>
-                        <li><a href="#get-involved">Get Involved</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Our Programs</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Reforestation</a></li>
-                        <li><a href="#">Ocean Cleanup</a></li>
-                        <li><a href="#">Wildlife Protection</a></li>
-                        <li><a href="#">Climate Education</a></li>
-                        <li><a href="#">Sustainable Agriculture</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Contact Us</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Copper Creek Drive, New York</p>
-                    <p><i class="fas fa-phone"></i> +1 (312) 171-0771</p>
-                    <p><i class="fas fa-envelope"></i> support@greennetwork.org</p>
-                </div>
-            </div>
-            <div class="copyright">
-                <p>&copy; 2025 Green Network. All rights reserved.</p>
-            </div>
-        </div>
+    <!-- 底部说明 -->
+    <footer class="footer">
+      <span>
+        说明：这个页面不依赖任何框架、无脚本必需逻辑、无后端，仅由一份
+        <code>index.html</code> 构成，可离线保存、随意二创。
+      </span>
+      <span>
+        使用方式：直接保存为 <code>index.html</code>，或按你的喜好改成个人主页 / 作品集 / 日记模版。
+      </span>
     </footer>
-
-    <script>
-        // Mobile Menu Toggle
-        document.querySelector('.mobile-menu').addEventListener('click', function() {
-            document.querySelector('nav ul').classList.toggle('active');
-        });
-
-        // Counter Animation
-        function animateCounters() {
-            const counters = document.querySelectorAll('.counter');
-            const speed = 200; // The lower the slower
-            
-            counters.forEach(counter => {
-                const target = +counter.getAttribute('data-target');
-                const count = +counter.innerText;
-                
-                const inc = target / speed;
-                
-                if(count < target) {
-                    counter.innerText = Math.ceil(count + inc);
-                    setTimeout(animateCounters, 1);
-                } else {
-                    counter.innerText = target;
-                }
-            });
-        }
-
-        // Initialize counters when page loads
-        window.addEventListener('load', animateCounters);
-
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                
-                const targetId = this.getAttribute('href');
-                if(targetId === '#') return;
-                
-                const targetElement = document.querySelector(targetId);
-                if(targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 80,
-                        behavior: 'smooth'
-                    });
-                    
-                    document.querySelector('nav ul').classList.remove('active');
-                }
-            });
-        });
-    </script>
+  </main>
 </body>
-
 </html>
